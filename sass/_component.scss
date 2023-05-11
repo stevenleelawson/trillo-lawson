@@ -1,0 +1,173 @@
+///////////////////////////////////////////////
+// LOGO
+.logo {
+	height: 3.25rem;
+	margin-left: 3rem;
+}
+
+///////////////////////////////////////////////
+// SEARCH
+.search {
+	flex: 0 0 40%;
+
+	// NESTED FLEX!
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&__input {
+		// input elem DOES NOT automatically inherit based on the global document for either of these:
+		font-family: inherit;
+		font-size: inherit;
+		color: inherit;
+		background-color: var(--color-grey-light-2);
+		border: none;
+		padding: .7rem 2rem;
+		border-radius: 110px;
+		width: 90%;
+		transition: all .2s;
+
+		// this way btn will move on top of the input
+		margin-right: -3.5rem;
+
+		&:focus {
+			outline: none;
+			width: 100%;
+			background-color: var(--color-grey-light-3);
+		}
+
+		// chrome and safari browsers
+		&::-webkit-input-placeholder {
+			font-weight: 100;
+			color: var(--color-grey-light-4);
+		}
+	}
+
+	// checkbox hack by selecting the adjacent elem (sibling) based on pseudo state
+	&__input:focus + &__button {
+		background-color: var(--color-grey-light-3);
+	}
+
+	&__button {
+		border: none;
+		background-color: var(--color-grey-light-2);
+
+		&:focus {
+			outline: none;
+		}
+
+		&:active {
+			transform: translateY(2px);
+		}
+	}
+
+	&__icon {
+		height: 2rem;
+		width: 2rem;
+
+		// this declaration changes the actual SVG color
+		fill: var(--color-grey-dark-3);
+	}
+}
+
+///////////////////////////////////////////////
+// USER NAVIGATION
+.user-nav {
+
+	// this over-rides the cross-axis centering we did in the .header class
+	align-self: stretch;
+
+	display: flex;
+	align-items: center;
+
+	// user nav AND all of the direct children
+	& > * {
+		padding: 0 2rem;
+		cursor: pointer;
+		height: 100%;
+
+		display: flex;
+		// aligns items along CROSS axis, which is usually vertically
+		align-items: center;
+	}
+
+	& > *:hover {
+		background-color: var(--color-grey-light-2);
+	}
+
+	&__icon-box {
+		position: relative;
+	}
+
+	&__icon {
+		height: 2.25rem;
+		width: 2.25rem;
+		color: var(--color-grey-dark-2);
+	}
+
+	&__notification {
+		font-size: .8rem;
+		height: 1.75rem;
+		width: 1.75rem;
+		background-color: var(--color-primary);
+		border-radius: 50% ;
+		color: #fff;
+		position: absolute;
+		top: 1.5rem;
+		right: 1.1rem;
+
+		//this is how I tried to center the little numbers in the notification bubbles AND I FUCKIN NAILED IT
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		
+	}
+
+	&__user-photo {
+		height: 3.75rem;
+		width: 3.75rem;
+		border-radius: 50%;
+		margin-right: 1rem;
+	}
+}
+
+///////////////////////////////////////////////
+// SIDE NAVIGATION
+.side-nav {
+	font-size: 1.4rem;
+	list-style: none;
+	margin-top: 3.5rem;
+
+	&__item {}
+
+	&__link:link,
+	&__link:visited {
+		color: var(--color-grey-light-1);
+		text-decoration: none;
+		text-transform: uppercase;
+		display: block;
+
+		// padding: top/bottom left/right;
+		padding: 1.5rem 3rem;
+	}
+
+	&__icon {
+		// NOTE: usually size SVGs as SQUARES
+		width: 1.75rem;
+		height: 1.75rem;
+		margin-right: 2rem;
+
+		// currentColor is the current color being used or the PARENT (in this case, made --color-grey-light-1 as above ^^
+		fill: currentColor;
+	}
+}
+
+///////////////////////////////////////////////
+// LEGAL
+
+.legal {
+	text-align: center;
+	font-size: 1.2rem;
+	color: var(--color-grey-light-4);
+	padding: 2.5rem;
+}
