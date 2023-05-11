@@ -137,11 +137,54 @@
 	font-size: 1.4rem;
 	list-style: none;
 	margin-top: 3.5rem;
+	
+	&__item {
+		position: relative;
 
-	&__item {}
+		// Trick to give all of the items a margin EXCEPT the last one. STandard. Classic, man
+		&:not(:last-child) {
+			margin-bottom: .5rem;
+		}
+	}
 
+	// using ::before for cool thin pink line to the left of the nav list link items
+	&__item::before {
+		// always need to specify content or it's NOT going to work!!
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 3px;
+		background-color: var(--color-primary);
+		transform: scaleY(0);
+
+		// this added properties are for the horizontal pink highlight animation on hover
+		// NOTE how below multiple animations for different props can be animated
+		transition: transform .2s,
+					width .4s cubic-bezier(1,0, 0, 1) .2s,
+					background-color .1s;
+	}
+
+
+	// THIS is so the pink line to the left only appears next to hovered item
+	&__item:hover::before,
+	&__item--active::before {
+		// the line grows from the middle out because we are using scale in the Y direction 
+		transform: scaleY(1);
+
+		// this is for the highlight effect on hover horizontally
+		width: 100%;
+	}
+
+	&__item:active::before {
+		background-color: var(--color-primary-light);
+	}
 	&__link:link,
 	&__link:visited {
+		// !!!!! z-index ONLY works with the position set to anything other than default (you forgot to do that and couldn't figure out why the damn z-index wasn't working)
+		position: relative;
+		z-index: 2;
 		color: var(--color-grey-light-1);
 		text-decoration: none;
 		text-transform: uppercase;
@@ -149,6 +192,14 @@
 
 		// padding: top/bottom left/right;
 		padding: 1.5rem 3rem;
+
+		// two lines of code aligns the icons and nav list links. cool!!!
+		display: flex;
+		align-items: center;
+	}
+
+	&__link:hover {
+		color: currentColor;
 	}
 
 	&__icon {
@@ -158,6 +209,7 @@
 		margin-right: 2rem;
 
 		// currentColor is the current color being used or the PARENT (in this case, made --color-grey-light-1 as above ^^
+		// and reminder, the fill property is used for svg color
 		fill: currentColor;
 	}
 }
